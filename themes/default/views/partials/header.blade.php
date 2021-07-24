@@ -21,7 +21,20 @@
                             <li><i class="ti-location-pin"></i> Store location</li>
                             <li><i class="ti-alarm-clock"></i> <a href="#">Daily deal</a></li>
                             <li><i class="ti-user"></i> <a href="{{ route('account') }}">My account</a></li>
-                            <li><i class="ti-power-off"></i><a href="{{ route('login') }}">Login</a></li>
+                            @guest
+                                <li><i class="fa fa-sign-in"></i><a href="{{ route('login') }}">Login</a></li>
+                            @endguest
+                            @auth
+                                <li>
+                                    <i class="fa fa-sign-out"></i>
+                                    <a href="{{ route('logout') }}"
+                                        onclick="event.preventDefault();
+                                        document.getElementById('logout-form').submit();">Logout</a>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">
+                                        @csrf
+                                    </form>
+                                </li>
+                            @endauth
                         </ul>
                     </div>
                     <!-- End Top Right -->

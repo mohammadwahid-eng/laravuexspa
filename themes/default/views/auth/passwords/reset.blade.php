@@ -1,74 +1,52 @@
 <x-app-layout>
-    <div class="flex flex-col items-center min-h-screen pt-6 bg-gray-100 sm:justify-center sm:pt-0">
-        <div>
-            <a href="/">
-                <x-application-logo class="w-20 h-20 text-gray-500 fill-current" />
-            </a>
-        </div>
+    <!-- Password Reset -->
+	<section class="shop login section">
+		<div class="container">
+			<div class="row"> 
+				<div class="col-lg-6 offset-lg-3 col-12">
+				<div class="login-form">
+						<h2>{{ __('Password Reset') }}</h2>
+						<!-- Form -->
+						<form class="form" method="POST" action="{{ route('password.update') }}">
+							@csrf
 
-        <div class="w-full px-6 py-4 mt-6 overflow-hidden bg-white shadow-md sm:max-w-md sm:rounded-lg">
-            <!-- Session Status -->
-            <x-auth-session-status class="mb-4" :status="session('status')" />
+                            <!-- Password Reset Token -->
+                            <input type="hidden" name="token" value="{{ $request->route('token') }}">
 
-            <!-- Validation Errors -->
-            <x-auth-validation-errors class="mb-4" :errors="$errors" />
-
-            <form method="POST" action="{{ route('password.update') }}">
-                @csrf
-
-                <!-- Password Reset Token -->
-                <input type="hidden" name="token" value="{{ $request->route('token') }}">
-
-                <!-- Email Address -->
-                <div class="mt-4">
-                    <label class="block text-sm font-medium text-gray-700">
-                        {{ __('Email') }}
-                    </label>
-
-                    <input id="email" type="email"
-                            class="form-input w-full @error('email') border-red-500 @enderror" name="email"
-                            value="{{ old('email',  $request->email) }}" required autocomplete="email">
-
-                    @error('email')
-                        <p class="mt-1 text-xs italic text-red-500">
-                            {{ $message }}
-                        </p>
-                    @enderror
-                </div>
-
-                <!-- Password -->
-                <div class="mt-4">
-                    <label class="block text-sm font-medium text-gray-700">
-                        {{ __('Password') }}
-                    </label>
-
-                    <input id="password" type="password"
-                            class="form-input w-full @error('password') border-red-500 @enderror" name="password"
-                            required autocomplete="new-password">
-
-                    @error('password')
-                        <p class="mt-1 text-xs italic text-red-500">
-                            {{ $message }}
-                        </p>
-                    @enderror
-                </div>
-
-                <!-- Confirm Password -->
-                <div class="mt-4">
-                    <label class="block text-sm font-medium text-gray-700">
-                        {{ __('Confirm Password') }}
-                    </label>
-
-                    <input id="password-confirm" type="password" class="w-full form-input"
-                            name="password_confirmation" required autocomplete="new-password">
-                </div>
-
-                <div class="flex items-center justify-end mt-4">
-                    <button type="submit" class="inline-flex items-center px-4 py-2 ml-4 text-xs font-semibold tracking-widest text-white uppercase transition duration-150 ease-in-out bg-gray-800 border border-transparent rounded-md hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300 disabled:opacity-25">
-                        {{ __('Reset Password') }}
-                    </button>
-                </div>
-            </form>
-        </div>
-    </div>
+							<div class="row">
+								<div class="col-12">
+									<div class="form-group">
+										<label for="email">{{ __('Your Email') }}<span class="text-danger">*</span></label>
+										<input type="email" name="email" id="email" class="@error('email') border border-danger @enderror" value="{{ old('email',  $request->email) }}" required>
+										@error('email')<div class="text-left text-danger">{{ $message }}</div>@enderror
+									</div>
+								</div>
+								<div class="col-12">
+									<div class="form-group">
+										<label for="password">{{ __('Your Password') }}<span class="text-danger">*</span></label>
+										<input type="password" name="password" id="password" class="@error('password') border border-danger @enderror" required>
+										@error('password')<div class="text-left text-danger">{{ $message }}</div>@enderror
+									</div>
+								</div>
+								<div class="col-12">
+									<div class="form-group">
+										<label for="password_confirmation">{{ __('Confirm Password') }}<span class="text-danger">*</span></label>
+										<input type="password" name="password_confirmation" id="password_confirmation" class="@error('password_confirmation') border border-danger @enderror" required>
+										@error('password_confirmation')<div class="text-left text-danger">{{ $message }}</div>@enderror
+									</div>
+								</div>
+								<div class="col-12">
+									<div class="form-group login-btn">
+										<button class="btn" type="submit">{{ __('Reset Password') }}</button>
+									</div>
+								</div>
+							</div>
+						</form>
+						<!--/ End Form -->
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!--/ End Password Reset -->
 </x-app-layout>

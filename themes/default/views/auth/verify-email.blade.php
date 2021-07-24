@@ -38,4 +38,58 @@
             </div>
         </div>
     </div>
+
+
+
+    <!-- Shop Login -->
+    <section class="shop login section">
+		<div class="container">
+			<div class="row"> 
+				<div class="col-lg-6 offset-lg-3 col-12">
+					<div class="login-form">
+						<h2>{{ __('Email Verification') }}</h2>
+						<p>{{ __('Thanks for signing up! Before getting started, could you verify your email address by clicking on the link we just emailed to you? If you didn\'t receive the email, we will gladly send you another.') }}</p>
+
+                        @if (session('status') == 'verification-link-sent')
+                            <div class="alert alert-success">{{ __('A new verification link has been sent to the email address you provided during registration.') }}</div>
+                        @endif
+
+						<!-- Form -->
+						<form class="form" method="POST" action="{{ route('verification.send') }}">
+							@csrf
+							<div class="row">
+								<div class="col-12">
+									<div class="form-group login-btn">
+										<button class="btn" type="submit">{{ __('Resend Verification Email') }}</button>
+									</div>
+								</div>
+							</div>
+						</form>
+						<!--/ End Form -->
+
+						<!-- Form -->
+						<form class="form" method="POST" action="{{ route('logout') }}">
+							@csrf
+							<div class="row">
+								<div class="col-12">
+									<div class="form-group login-btn">
+										<button class="btn" type="submit">{{ __('Log Out') }}</button>
+									</div>
+								</div>
+							</div>
+						</form>
+						<!--/ End Form -->
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!--/ End Login -->
+
+
+
+
+
+
+
 </x-app-layout>
